@@ -1,0 +1,14 @@
+{
+	"description": "The CodeIgniter framework",
+	"name": "codeigniter/framework",
+	"type": "project",
+	"homepage": "https://codeigniter.com",
+	"require": {
+		"php": ">=7.0.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"controllers\\api":"action"
+		}
+	}
+}

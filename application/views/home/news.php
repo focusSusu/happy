@@ -13,22 +13,12 @@
 
 <body>
     <div class="news">
-        <ul class="news_wrap">
-            <?php foreach ($list as $val): ?>
+        <ul class="news_wrap _article">
 
-            <li class="news_item">
-                    <a href="<?= base_url()?>h5/api/getArticleDetails?id=<?=$val['id'] ?>">
+            <center class="_loading">加载中.....</center>
 
-                    <img class="news_image" src="<?=$val['head_img'] ?>">
-                    <div class="news_desc">
-                        <p class="title">标题：<?=$val['name'] ?></p>
-                        <p class="desc">内容：<?=$val['remark'] ?></p>
-                        <p class="read_amount">阅读：<?=$val['browse_count'] ?>次</p>
-                        <p class="public_time">发布时间：<?=$val['add_time'] ?></p>
-                    </div>
-                </a>
-            </li>
-            <?php endforeach; ?>
+
+
 
 
         </ul>
@@ -77,10 +67,40 @@
             </a>
         </li>
     </ul>
+    <input type="hidden" value="1" name="curpage" id="_article">
 
 </body>
+
+<script src="<?= base_url() ?>/style/home-data.js"></script>
+
 <script>
-    
+    $(function () {
+        getData();
+
+        window.addEventListener('scroll',function(){
+            var height = document.body.clientHeight;
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            var windowH =window.innerHeight;
+            if(scrollTop+windowH > height-5){
+                //加载数据，显示loading
+                var nextPage = parseInt($("#_article").val()) +1;
+                var curpage = $("#_article").val(nextPage);
+                getData(nextPage);
+            }
+        },false);
+
+        function getData(curPage=1) {
+
+            var slist = {"type":'_article','category_id':'_article'};
+
+            console.log(slist);
+            //ajax请求后台数据
+            var url = "<?= base_url()."h5/api/getArticleList/" ?>";
+            studentInfo(slist,url,curPage);
+            // toPage(slist,url);
+        }
+    });
+
 </script>
 
 </html>

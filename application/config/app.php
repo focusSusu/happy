@@ -5,6 +5,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * @author Devin.qin 2017-12-01
  */
 $config = array(
+    'app'=>[
+        'app_id'=>'wx2eff379977cb93c0',
+        'app_key'=>'2d51badb080f8817e9d1af803b5305d2'
+    ],
 
     //图片
     'image_upload_file'=>[

@@ -14,6 +14,8 @@ class Upload extends My_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('Logs');
+
     }
 
     //上传图片
@@ -22,6 +24,7 @@ class Upload extends My_Controller {
 
 
         try {
+            Logs::write(json_encode($_FILES),'inputs');
 
             if (empty($_FILES)){
                 $this->responseJson(1003,'请检查文件大小或不支持的文件');

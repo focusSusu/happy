@@ -19,10 +19,10 @@
     <div class="me">
         <div class="user_info">
             <div class="user_img">
-                <img src="<?= base_url() ?>style/home/img/001.png">
+                <img src="<?=$headimgurl ?>">
             </div>
             <p class="nickname">
-                昵称：zoe
+                昵称：<?=$nickname ?>
             </p>
         </div>
         <p class="history">

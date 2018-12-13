@@ -50,6 +50,7 @@
 
             </div>
             <div class="article_contet _list">
+                <center class="_loading">加载中.....</center>
 
 
             </div>
@@ -58,7 +59,6 @@
             <input type="hidden" value="0"  id="curType">
 
 
-            <button id="loading">加载更多</button>
         </div>
     </div>
     <ul class="check_list">
@@ -116,6 +116,19 @@
     $(function () {
         getData();
 
+        window.addEventListener('scroll',function(){
+            var height = document.body.clientHeight;
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            var windowH =window.innerHeight;
+            if(scrollTop+windowH > height-5){
+                //加载数据，显示loading
+                var nextPage = parseInt($("#_list").val()) +1;
+                var curpage = $("#_list").val(nextPage);
+                getData(types,nextPage);
+            }
+        },false);
+
+
         $("#loading").click(function () {
             var nextPage = parseInt($("#_list").val()) +1;
             var curpage = $("#_list").val(nextPage);
@@ -130,7 +143,7 @@
                 type = bute;
             }
 
-            var slist = {"type":'_list','category_id':types};
+            var slist = {"type":'_list','category_id':type};
 
             console.log(slist);
             //ajax请求后台数据

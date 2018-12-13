@@ -20,7 +20,9 @@
                 <?php endforeach; ?>
             </div>
             <div class="article_contet _my">
-               
+                <center class="_loading">加载中.....</center>
+
+
             </div>
             <input type="hidden" value="1" name="curpage" id="_my">
 
@@ -28,7 +30,7 @@
 
 
 
-            <button id="loading">加载更多</button>
+<!--            <button id="loading">加载更多</button>-->
         </div>
     </div>
 </body>
@@ -40,6 +42,17 @@
     $(function () {
 
         getData();
+
+        window.addEventListener('scroll',function(){
+            var height = document.body.clientHeight;
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            var windowH =window.innerHeight;
+            if(scrollTop+windowH > height-5){
+                var nextPage = parseInt($("#_my").val()) +1;
+                var curpage = $("#_my").val(nextPage);
+                getData(types,nextPage);
+            }
+        },false);
 
         $("#loading").click(function () {
             var nextPage = parseInt($("#_my").val()) +1;

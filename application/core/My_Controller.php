@@ -12,7 +12,21 @@ class My_Controller extends CI_Controller{
     {
         parent::__construct();
         $this->load->library('session');
-//        $this->checkUserLogin();
+        if (strtolower($this->router->fetch_class()) == 'api') {
+            $this->checkWechatLogin();
+        } else {
+            $this->checkUserLogin();
+        }
+    }
+
+    //检测微信是否登录
+    public function checkWechatLogin()
+    {
+        $userInfo = $this->session->userdata('userInfo_wechat');
+        if (empty($userInfo)) {
+            $url = base_url().'h5/wechat/wechatLogin';
+            header("Location:".$url);
+        }
     }
 
 

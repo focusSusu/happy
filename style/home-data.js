@@ -12,6 +12,7 @@ function  studentInfo(slist,url,curr,limit){
             "data":slist
         },
         success:function (data) {
+            $("._loading").remove();
             // $("."+slist.type).html('');
             $("."+slist.type).append(data);
             total = $("#total").val();

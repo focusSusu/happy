@@ -62,19 +62,19 @@
             <span class="types" bute="_newest">最新消息</span>
         </div>
         <div class="article_contet _hot">
-
+                <center class="_loading">加载中.....</center>
 
         </div>
 
-        <input type="text" value="1" name="curpage" id="_hot">
+        <input type="hidden" value="1" name="curpage" id="_hot">
 
-        <input type="text" value="1" name="curpage" id="_newest">
+        <input type="hidden" value="1" name="curpage" id="_newest">
 
         <div class="article_contet _newest" style="display: none">
+            <center class="_loading">加载中.....</center>
 
         </div>
 
-        <button id="loading">加载更多</button>
 
     </div>
 
@@ -128,6 +128,19 @@
 <script src="<?= base_url() ?>/style/home-data.js"></script>
 <script>
      types = '_hot';
+
+     window.addEventListener('scroll',function(){
+         var height = document.body.clientHeight;
+         var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+         var windowH =window.innerHeight;
+         if(scrollTop+windowH > height-5){
+             console.log(types);
+             var nextPage = parseInt($("#"+types).val()) +1;
+             var curpage = $("#"+types).val(nextPage);
+             getData(types,nextPage);
+         }
+     },false);
+
     $(".types").click(function () {
         types = $(this).attr('bute');
 

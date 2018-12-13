@@ -17,9 +17,11 @@
         </p>
         <div class="img_area">
             <div class="img_block">
+                <?php if(is_array($v['img_list']) && !empty($v['img_list'])): ?>
                 <?php foreach ($v['img_list'] as $value):?>
                 <img src="<?= $value ?>">
                 <?php endforeach; ?>
+                <?php endif; ?>
             </div>
             <div class="call_me">
                 <img src="<?= base_url() ?>style/home/img/call_me.png">

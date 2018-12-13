@@ -126,10 +126,13 @@
 
         //多图片上传
         upload.render({
+
             elem: '#test2'
             ,url: '<?=base_url() ?>upload/uploadFile/'
             ,multiple: true
             ,before: function(obj){
+                alert(1)
+
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
                     $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" width="20%" height="20%">')

@@ -8,7 +8,10 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"controllers\\api":"action"
+			"service\\artisan\\":"application/service/artisan",
+			"service\\WeApp\\":"application/service/WeApp",
+			"service\\util\\aes\\":"application/service/util/aes",
+			"service\\utill\\":"application/service/util"
 		}
 	}
 }

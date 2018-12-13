@@ -8,7 +8,6 @@
 
 class Api extends My_Controller {
 
-
     /**
      * 首页
      * @param
@@ -67,7 +66,9 @@ class Api extends My_Controller {
             $result['list'] = $this->db->where(['status'=>1,'category_id'=>$category_id])->limit($pageSize, $offset)->order_by('browse_count','desc')->get('class_release')->result_array();
 
         } elseif($type == '_my') {
-            $user_id = 1;
+
+            $userInfo  = $this->session->userdata('userInfo_wechat');
+            $user_id = $userInfo['id'];
             $result['list'] = $this->db->where(['user_id'=>$user_id,'category_id'=>$category_id])->limit($pageSize, $offset)->order_by('browse_count','desc')->get('class_release')->result_array();
         }
 
@@ -75,10 +76,35 @@ class Api extends My_Controller {
            $val['img_list'] = json_decode($val['img']);
         });
 
+//        print_r($result);die;
 
         $result['page'] = $curPage;
 
         $this->load->view('home/relaese',$result);
+
+    }
+
+    //获取列表
+    public function getArticleList()
+    {
+
+        $curPage = $this->input->post('curPage') ?: 1;
+
+        $pageSize = $this->input->post('pageSize') ?: 8;
+
+        $offset = (($curPage>0 ? $curPage : 1) - 1) * $pageSize;
+
+
+
+        $result['list'] = [];
+
+
+        $result['list'] = $this->db->where(['status'=>1])->limit($pageSize, $offset)->limit($pageSize, $offset)->order_by('id','desc')->get('class_article')->result_array();
+
+
+        $result['page'] = $curPage;
+
+        $this->load->view('home/articleList',$result);
 
     }
 
@@ -122,16 +148,8 @@ class Api extends My_Controller {
     public function getArticle()
     {
 
-        $curPage = $this->input->post('curPage') ?: 1;
-        $pageSize = $this->input->post('pageSize') ?: 10;
 
-        $offset = (($curPage>0 ? $curPage : 1) - 1) * $pageSize;
-
-        $result = $this->db->where(['status'=>1])->limit($pageSize, $offset)->order_by('id','desc')->get('class_article')->result_array();
-
-        $res['list'] = $result;
-        $res['curPage'] = $curPage;
-        $this->load->view('home/news',$res);
+        $this->load->view('home/news');
 
     }
 
@@ -210,9 +228,7 @@ class Api extends My_Controller {
     public function getMyRelease()
     {
 
-
         $result['category'] = $this->db->select('id,name')->where(['status'=>1])->get('class_category')->result_array();
-
         $this->load->view('home/public_history',$result);
     }
     /**
@@ -223,7 +239,8 @@ class Api extends My_Controller {
     public function release()
     {
         $input = $this->input->post();
-        $input['user_id'] = 1;
+        $userInfo  = $this->session->userdata('userInfo_wechat');
+        $input['user_id'] = $userInfo['id'];
 
         if (
             empty($input['category_id']) ||
@@ -257,7 +274,8 @@ class Api extends My_Controller {
     //我的
     public function me()
     {
-        $this->load->view('home/me');
+        $user = $this->session->userdata('userInfo_wechat');
+        $this->load->view('home/me',$user);
 
     }
 

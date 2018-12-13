@@ -374,13 +374,13 @@ body {
             -webkit-box-direction: normal;
                 -ms-flex-direction: column;
                     flex-direction: column;
-            // filter: grayscale(20%);
+            filter: grayscale(20%);
             opacity: 0.6;
 
-            // &:hover {
-            //     filter: grayscale(0%);
-            //     opacity: 1;
-            // }
+            &:hover {
+                filter: grayscale(0%);
+                opacity: 1;
+            }
 
             .wrap {
                 display: inline-block;
@@ -401,10 +401,10 @@ body {
             }
         }
 
-        // .list_item.active {
-        // filter: grayscale(0%);
-        // opacity: 1;
-        // }
+        .list_item.active {
+        filter: grayscale(0%);
+        opacity: 1;
+        }
     }
 
     .information_list {
@@ -1156,4 +1156,5 @@ body {
             }
         }
     }
+
 }

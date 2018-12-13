@@ -315,7 +315,12 @@ body {
       -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
+      filter: grayscale(20%);
       opacity: 0.6; }
+      html .check_list .list_item:hover,
+      body .check_list .list_item:hover {
+        filter: grayscale(0%);
+        opacity: 1; }
       html .check_list .list_item .wrap,
       body .check_list .list_item .wrap {
         display: inline-block;
@@ -331,6 +336,10 @@ body {
           margin-top: 0.026667rem;
           display: block;
           line-height: 1; }
+    html .check_list .list_item.active,
+    body .check_list .list_item.active {
+      filter: grayscale(0%);
+      opacity: 1; }
   html .information_list .article,
   body .information_list .article {
     margin: 0 !important;
